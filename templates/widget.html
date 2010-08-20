@@ -1,0 +1,33 @@
+{% if widget %}
+    <script src="http://widgets.twimg.com/j/2/widget.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    new TWTR.Widget({
+    version: 2,
+    type: 'profile',
+    rpp: {{ widget.tweets_to_show }},
+    interval: {{ widget.update_interval }},
+    width: {% if widget.autofit_width %}'all'{% else %}{{ widget.widget_width }}{% endif %},
+    height: {{ widget.widget_width }},
+    theme: {
+        shell: {
+        background: '{{ widget.shell_background }}',
+        color: '{{ widget.shell_color }}'
+        },
+        tweets: {
+        background: '{{ widget.tweets_background }}',
+        color: '{{ widget.tweets_color }}',
+        links: '{{ widget.tweets_links }}'
+        }
+    },
+    features: {
+        scrollbar: {% if widget.show_scrollbar %}true{% else %}false {% endif %},
+        loop: {% if widget.loop_results %}true{% else %}false {% endif %},
+        live: {% if widget.poll_data %}true{% else %}false {% endif %},
+        hashtags: {% if widget.show_hashtags %}true{% else %}false {% endif %},
+        timestamp: {% if widget.show_timestamps %}true{% else %}false {% endif %},
+        avatars: {% if widget.show_avatars %}true{% else %}false {% endif %},
+        behavior: '{{ widget.behaviour }}'
+    }
+    }).render().setUser('{{ widget.username }}').start();
+    </script>
+{% endif %}
