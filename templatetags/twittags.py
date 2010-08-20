@@ -16,6 +16,7 @@ def twitter_user(user, result_limit=10):
 
 @register.inclusion_tag('widget.html')
 def render_widget(source_url='/'):
+    print source_url
     try:
         widget = TwitterWidget.objects.get(url=source_url)
     except TwitterWidget.DoesNotExist:
